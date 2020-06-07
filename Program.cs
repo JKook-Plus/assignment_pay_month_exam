@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 
@@ -236,7 +237,7 @@ namespace assignment
                 // sorts the students by their grade
                 //
                 var result1 = names.OrderByDescending(a => a.Score).Reverse();
-
+                if (File.Exists(marks_file)) { File.Delete("distinctionList.txt"); }
                 foreach (Student stu in result1)
                 {
                     
@@ -246,16 +247,20 @@ namespace assignment
                     else if (stu.Score > 50) { stu.Grade = "Pass"; }
                     else { stu.Grade = "Fail"; }
 
-                    Console.WriteLine(stu.Grade + " " + stu.Score + " " + stu.Name);
-
+                    
+                    string to_file = (stu.Grade + " " + stu.Score + "% " + stu.Name);
+                    Console.WriteLine(to_file);
+                    File.AppendAllText("distinctionList.txt", to_file + Environment.NewLine);
                 }
+                
+                
+                
 
-
-
+                Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
 
             }
-            else { Console.WriteLine("File 'marks.txt' does not exist"); }
+            else { Console.WriteLine("File 'marks.txt' does not exist\nPlease re-run the program once this file exists"); }
 
 
 
