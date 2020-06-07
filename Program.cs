@@ -39,7 +39,7 @@ namespace assignment
 
                     case "2":
                         int chosen_month_int = get_months();
-                        Months(chosen_month_int);
+                        int length_of_month = Months(chosen_month_int);
                         break;
 
                     case "3":
@@ -110,12 +110,49 @@ namespace assignment
         }
 
 
-        static int Months(int Month_type)
+        static int Months(int month_type)
         {
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             int[] months_length = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-            Console.WriteLine(string.Join(",", months_length));
+            if (month_type == 2)
+            {
+                int year = 0;
+                while (year < 1)
+                {
+                    Console.WriteLine("What year are you looking for?");
+                    year = int.Parse(Console.ReadLine());
+                    if (year < 1)
+                    {
+                        Console.WriteLine("Year is before 0 please try again");
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (((year % 4) == 0) & ((year % 100) != 0) || ((year % 400) == 0))
+                {
+                    Console.WriteLine("yeeees");
+                    return (29);
+                }
+                else
+                {
+                    Console.WriteLine("Not a leap year");
+                    return (28);
+                }
+                
+            }
+
+            else
+            {
+                Console.WriteLine(string.Join(",", months_length));
+                Console.WriteLine(months_length[month_type]);
+                return (months_length[month_type]);
+            }
+            
+            
 
             return 0;
         }
