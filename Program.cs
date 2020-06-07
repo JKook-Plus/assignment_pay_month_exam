@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 
@@ -204,16 +207,45 @@ namespace assignment
             string marks_file = "marks.txt";
             string file_name = Directory.GetCurrentDirectory();
 
-
             if (File.Exists(marks_file))
             {
+                //
+                // reads file "marks_file" into a list where every line is a element
+                //
                 string[] lines = System.IO.File.ReadAllLines(marks_file);
+
+                //
+                // creates list names that contains the objects students which have
+                // name and grade
+                //
+
+                List<Student> names = new List<Student>();
+
+
                 foreach (string line in lines)
                 {
-                    Console.WriteLine(line);
+                    //
+                    // splits every line into "name" and "grade"
+                    //
+
+                    var words = line.Split(' ');
+                    names.Add(new Student(words[1], Int16.Parse(words[0])));
+
+                }
+                //
+                // sorts the students by their grade
+                //
+                var result1 = names.OrderByDescending(a => a.Grade).Reverse();
+
+                foreach (Student stu in result1)
+                {
+                    Console.WriteLine(stu.Grade + " " + stu.Name);
                 }
 
+
+
             }
+            else { Console.WriteLine("File 'marks.txt' does not exist"); }
 
 
 
@@ -223,5 +255,17 @@ namespace assignment
         }
 
 
+    }
+
+    public class Student
+    {
+        public string Name { get; set; }
+        public int Grade { get; set; }
+
+        public Student(string name, int grade)
+        {
+            Name = name;
+            Grade = grade;
+        }
     }
 }
