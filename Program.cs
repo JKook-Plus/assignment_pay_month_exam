@@ -229,18 +229,28 @@ namespace assignment
                     //
 
                     var words = line.Split(' ');
-                    names.Add(new Student(words[1], Int16.Parse(words[0])));
+                    names.Add(new Student(words[1], Int16.Parse(words[0]), ""));
 
                 }
                 //
                 // sorts the students by their grade
                 //
-                var result1 = names.OrderByDescending(a => a.Grade).Reverse();
+                var result1 = names.OrderByDescending(a => a.Score).Reverse();
 
                 foreach (Student stu in result1)
                 {
-                    Console.WriteLine(stu.Grade + " " + stu.Name);
+                    
+                    if ((stu.Score > 100) | (stu.Score < 0)) { stu.Grade = "Error"; }
+                    else if (stu.Score > 85) { stu.Grade = "Distinction"; }
+                    else if (stu.Score >= 75) { stu.Grade = "Credit"; }
+                    else if (stu.Score > 50) { stu.Grade = "Pass"; }
+                    else { stu.Grade = "Fail"; }
+
+                    Console.WriteLine(stu.Grade + " " + stu.Score + " " + stu.Name);
+
                 }
+
+
 
 
 
@@ -260,11 +270,13 @@ namespace assignment
     public class Student
     {
         public string Name { get; set; }
-        public int Grade { get; set; }
+        public int Score { get; set; }
+        public string Grade { get; set; }
 
-        public Student(string name, int grade)
+        public Student(string name, int score, string grade)
         {
             Name = name;
+            Score = score;
             Grade = grade;
         }
     }
