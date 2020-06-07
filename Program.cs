@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+
 
 namespace assignment
 {
@@ -43,7 +46,7 @@ namespace assignment
                         break;
 
                     case "3":
-                        //statement 
+                        exam();
                         break;
 
                     default:
@@ -154,7 +157,7 @@ namespace assignment
             
             
 
-            return 0;
+            //return 0;
         }
 
         static int get_months()
@@ -181,6 +184,42 @@ namespace assignment
 
             int month_chosen = int.Parse(Console.ReadLine());
             return month_chosen;
+        }
+
+        static void exam()
+        {
+            string exam_text_ascii = @"  ______                     
+ |  ____|                    
+ | |__  __  ____ _ _ __ ___  
+ |  __| \ \/ / _` | '_ ` _ \ 
+ | |____ >  < (_| | | | | | |
+ |______/_/\_\__,_|_| |_| |_|
+                             
+                             ";
+
+            Console.Clear();
+
+            Console.WriteLine(exam_text_ascii);
+
+            string marks_file = "marks.txt";
+            string file_name = Directory.GetCurrentDirectory();
+
+
+            if (File.Exists(marks_file))
+            {
+                string[] lines = System.IO.File.ReadAllLines(marks_file);
+                foreach (string line in lines)
+                {
+                    Console.WriteLine(line);
+                }
+
+            }
+
+
+
+
+
+
         }
 
 
