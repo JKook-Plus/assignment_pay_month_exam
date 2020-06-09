@@ -13,8 +13,11 @@ namespace assignment
     {
         static void Main(string[] args)
         {
-            bool to_continue = true;
 
+            //FigletFont font = FigletFont.Load("chunky.flf");
+            //Figlet figlet = new Figlet(font);
+            bool to_continue = true;
+            //Console.WriteAscii("HASSELHOFF", Color.FromArgb(DA, V, ID))
             string menu_text_ascii = @"  __  __                  
  |  \/  |                 
  | \  / | ___ _ __  _   _ 
@@ -24,7 +27,6 @@ namespace assignment
                                      ";
 
             
-
             while (to_continue)
             {
                 Console.WriteLine(menu_text_ascii);
@@ -38,7 +40,16 @@ namespace assignment
                 switch (menu)
                 {
                     case "1":
-                        decimal time_worked = decimal.Parse(Console.ReadLine());
+                        Console.Write("Please enter the number of hours worked. Valid input is between 0 and 60: ");
+                        string read_line = Console.ReadLine();
+                        int time_worked;
+                        bool success = Int32.TryParse(read_line, out time_worked);
+                        if (success != true)
+                        {
+                            Console.WriteLine("'{0}' is not a valid number.", read_line);
+                            break;
+                        }
+
                         decimal pay_amount = Pay_calc(time_worked);
                         Console.WriteLine(pay_amount.ToString("C2"));
 
@@ -74,9 +85,17 @@ namespace assignment
             decimal forty_five = 45;
             decimal five = 5;
 
+
+
             if (hours_worked >= 60)
             {
-                Console.WriteLine("Unable to pay more than 60h");
+                Console.WriteLine("Unable to pay more than 60h.");
+                return (0);
+            }
+
+            else if (hours_worked < 0)
+            {
+                Console.WriteLine("Please enter a positive number.");
                 return (0);
             }
 
@@ -181,7 +200,7 @@ namespace assignment
 
             Console.WriteLine(months_text_ascii);
 
-            for (int i = 0; i < months_array.Length; i++)
+            for (int i = 1; i < months_array.Length+1; i++)
             {
                 Console.WriteLine("{0} {1}", i, months_array[i]);
             }
@@ -250,7 +269,11 @@ namespace assignment
                     
                     string to_file = (stu.Grade + " " + stu.Score + "% " + stu.Name);
                     Console.WriteLine(to_file);
-                    File.AppendAllText("distinctionList.txt", to_file + Environment.NewLine);
+                    if (stu.Grade == "Distinction")
+                    {
+                        File.AppendAllText("distinctionList.txt", to_file + Environment.NewLine);
+                    }
+                    
                 }
                 
                 
