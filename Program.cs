@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Colorful;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
+using Console = Colorful.Console;
 
 namespace assignment
 {
@@ -13,11 +15,13 @@ namespace assignment
     {
         static void Main(string[] args)
         {
-
-            //FigletFont font = FigletFont.Load("chunky.flf");
-            //Figlet figlet = new Figlet(font);
             bool to_continue = true;
-            //Console.WriteAscii("HASSELHOFF", Color.FromArgb(DA, V, ID))
+
+            FigletFont font = FigletFont.Load("epic.flf");
+            Figlet figlet = new Figlet(font);
+
+            Console.WriteLine(figlet.ToAscii("Belvedere"), ColorTranslator.FromHtml("#8AFFEF"));
+            Console.WriteAscii("test", Color.FromArgb(0, 255, 0));
             string menu_text_ascii = @"  __  __                  
  |  \/  |                 
  | \  / | ___ _ __  _   _ 
