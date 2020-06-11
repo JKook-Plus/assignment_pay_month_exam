@@ -17,11 +17,11 @@ namespace assignment
         {
             bool to_continue = true;
 
-            FigletFont font = FigletFont.Load("epic.flf");
+            /*FigletFont font = FigletFont.Load("epic.flf");
             Figlet figlet = new Figlet(font);
 
             Console.WriteLine(figlet.ToAscii("Belvedere"), ColorTranslator.FromHtml("#8AFFEF"));
-            Console.WriteAscii("test", Color.FromArgb(0, 255, 0));
+            Console.WriteAscii("test", Color.FromArgb(0, 255, 0));*/
             string menu_text_ascii = @"  __  __                  
  |  \/  |                 
  | \  / | ___ _ __  _   _ 
@@ -204,9 +204,9 @@ namespace assignment
 
             Console.WriteLine(months_text_ascii);
 
-            for (int i = 1; i < months_array.Length+1; i++)
+            for (int i = 0; i < months_array.Length; i++)
             {
-                Console.WriteLine("{0} {1}", i, months_array[i]);
+                Console.WriteLine("{0} {1}", i+1, months_array[i]);
             }
 
             int month_chosen = int.Parse(Console.ReadLine());
