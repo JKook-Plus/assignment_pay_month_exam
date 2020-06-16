@@ -30,7 +30,8 @@ namespace assignment
             
             while (to_continue)
             {
-                Console.WriteLine(FiggleFonts.Standard.Render("Hello, World!"), Color.HotPink);
+                //FiggleFonts.Big
+                Console.WriteLine(FiggleFonts.Big.Render("Menu"), Color.HotPink);
                 //Console.WriteLine(figlet.ToAscii("test"));
                 //Console.WriteAscii("MENU", Color.FromArgb(0, 255, 0));
 
