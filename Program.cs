@@ -1,4 +1,5 @@
 ﻿using Colorful;
+using Figgle;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,28 +18,37 @@ namespace assignment
         {
             bool to_continue = true;
 
-            /*FigletFont font = FigletFont.Load("epic.flf");
-            Figlet figlet = new Figlet(font);
+            
 
-            Console.WriteLine(figlet.ToAscii("Belvedere"), ColorTranslator.FromHtml("#8AFFEF"));
-            Console.WriteAscii("test", Color.FromArgb(0, 255, 0));*/
-            string menu_text_ascii = @"  __  __                  
- |  \/  |                 
- | \  / | ___ _ __  _   _ 
- | |\/| |/ _ \ '_ \| | | |
- | |  | |  __/ | | | |_| |
- |_|  |_|\___|_| |_|\__,_| 
-                                     ";
+            //FigletFont font = FigletFont.Load("epic.flf");
+            //Figlet
+            Figlet figlet = new Figlet();
+
+            //Console.WriteLine(figlet.ToAscii("testing_1"), ColorTranslator.FromHtml("#8AFFEF"));
+            //Console.WriteAscii("test", Color.FromArgb(0, 255, 0));
 
             
             while (to_continue)
             {
-                Console.WriteLine(menu_text_ascii);
-                Console.WriteLine("(1) Pay");
+                Console.WriteLine(FiggleFonts.Standard.Render("Hello, World!"), Color.HotPink);
+                //Console.WriteLine(figlet.ToAscii("test"));
+                //Console.WriteAscii("MENU", Color.FromArgb(0, 255, 0));
+
+                //Console.WriteWithGradient(figlet.ToAscii("test"), Color.HotPink, Color.HotPink, 14);
+                Console.WriteWithGradient("(1) Pay\n", Color.HotPink, Color.HotPink, 14);
+                Console.WriteWithGradient("(2) Months\n", Color.HotPink, Color.HotPink, 14);
+                Console.WriteWithGradient("(3) Exam\n", Color.HotPink, Color.HotPink, 14);
+                Console.WriteWithGradient("Exit\n\n", Color.HotPink, Color.HotPink, 14);
+                //Console.WriteAsciiStyled("Test", Color.Yellow);
+                /*Console.WriteLine("(1) Pay");
                 Console.WriteLine("(2) Months");
                 Console.WriteLine("(3) Exam");
 
-                Console.WriteLine("Exit");
+
+
+                Console.WriteLine("Exit");*/
+
+                //Colorful.Console.CursorTop();
 
                 string menu = Console.ReadLine();
                 switch (menu)
@@ -189,20 +199,13 @@ namespace assignment
 
         static int get_months()
         {
-            string months_text_ascii = @"  __  __             _   _         
- |  \/  |           | | | |        
- | \  / | ___  _ __ | |_| |__  ___ 
- | |\/| |/ _ \| '_ \| __| '_ \/ __|
- | |  | | (_) | | | | |_| | | \__ \
- |_|  |_|\___/|_| |_|\__|_| |_|___/
-                                   
-                                   ";
+
 
             Console.Clear();
 
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
-            Console.WriteLine(months_text_ascii);
+            Console.WriteAscii("Months", Color.FromArgb(0, 255, 0));
 
             for (int i = 0; i < months_array.Length; i++)
             {
