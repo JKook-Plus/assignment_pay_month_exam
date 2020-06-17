@@ -19,37 +19,22 @@ namespace assignment
             bool to_continue = true;
 
             
-
-            //FigletFont font = FigletFont.Load("epic.flf");
-            //Figlet
             Figlet figlet = new Figlet();
 
-            //Console.WriteLine(figlet.ToAscii("testing_1"), ColorTranslator.FromHtml("#8AFFEF"));
-            //Console.WriteAscii("test", Color.FromArgb(0, 255, 0));
 
-            
             while (to_continue)
             {
-                //FiggleFonts.Big
-                Console.WriteLine(FiggleFonts.Big.Render("Menu"), Color.HotPink);
-                //Console.WriteLine(figlet.ToAscii("test"));
-                //Console.WriteAscii("MENU", Color.FromArgb(0, 255, 0));
+                Console.WriteWithGradient(FiggleFonts.Big.Render("Menu"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
-                //Console.WriteWithGradient(figlet.ToAscii("test"), Color.HotPink, Color.HotPink, 14);
-                Console.WriteWithGradient("(1) Pay\n", Color.HotPink, Color.HotPink, 14);
-                Console.WriteWithGradient("(2) Months\n", Color.HotPink, Color.HotPink, 14);
-                Console.WriteWithGradient("(3) Exam\n", Color.HotPink, Color.HotPink, 14);
-                Console.WriteWithGradient("Exit\n\n", Color.HotPink, Color.HotPink, 14);
-                //Console.WriteAsciiStyled("Test", Color.Yellow);
-                /*Console.WriteLine("(1) Pay");
-                Console.WriteLine("(2) Months");
-                Console.WriteLine("(3) Exam");
+                
+                Console.WriteWithGradient("(1) Pay\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteWithGradient("(2) Months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteWithGradient("(3) Exam\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteWithGradient("(4) Exit\n\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
-
-
-                Console.WriteLine("Exit");*/
-
-                //Colorful.Console.CursorTop();
+                //Colorful.Console.ReplaceAllColorsWithDefaults();
+                //Console.ReplaceAllColorsWithDefaults();
+                Console.WriteFormatted("Please choose an option: ", Color.White);
 
                 string menu = Console.ReadLine();
                 switch (menu)
@@ -67,20 +52,26 @@ namespace assignment
 
                         decimal pay_amount = Pay_calc(time_worked);
                         Console.WriteLine(pay_amount.ToString("C2"));
-
+                        
                         break;
 
                     case "2":
                         int chosen_month_int = get_months();
                         int length_of_month = Months(chosen_month_int);
+                        Console.WriteLineFormatted("The length of the month selected is " + length_of_month.ToString(), Color.White);
                         break;
 
                     case "3":
                         exam();
                         break;
 
-                    default:
+                    case "4":
                         to_continue = false;
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Please enter a valid option");
                         break;
                 }
                 //Console.Clear();
@@ -156,6 +147,10 @@ namespace assignment
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             int[] months_length = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+            if (month_type > months_array.Length) {
+                Console.WriteFormatted("Please choose a valid option", Color.White);
+            }
+
             if (month_type == 2)
             {
                 int year = 0;
@@ -175,11 +170,14 @@ namespace assignment
 
                 if (((year % 4) == 0) & ((year % 100) != 0) || ((year % 400) == 0))
                 {
-                    Console.WriteLine("yeeees");
+                    Console.Clear();
+                    Console.WriteLine("The year selected is a leap year");
+
                     return (29);
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Not a leap year");
                     return (28);
                 }
@@ -188,14 +186,10 @@ namespace assignment
 
             else
             {
-                Console.WriteLine(string.Join(",", months_length));
-                Console.WriteLine(months_length[month_type]);
+                Console.Clear();
                 return (months_length[month_type]);
             }
-            
-            
 
-            //return 0;
         }
 
         static int get_months()
@@ -205,12 +199,14 @@ namespace assignment
             Console.Clear();
 
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            Colorful.Console.ReplaceAllColorsWithDefaults();
 
-            Console.WriteAscii("Months", Color.FromArgb(0, 255, 0));
+            Console.WriteWithGradient(FiggleFonts.Big.Render("Months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             for (int i = 0; i < months_array.Length; i++)
             {
-                Console.WriteLine("{0} {1}", i+1, months_array[i]);
+                Console.WriteFormatted(String.Format("{0} {1}", i + 1, months_array[i]), Color.White);
+                Console.WriteLine();
             }
 
             int month_chosen = int.Parse(Console.ReadLine());
@@ -219,18 +215,11 @@ namespace assignment
 
         static void exam()
         {
-            string exam_text_ascii = @"  ______                     
- |  ____|                    
- | |__  __  ____ _ _ __ ___  
- |  __| \ \/ / _` | '_ ` _ \ 
- | |____ >  < (_| | | | | | |
- |______/_/\_\__,_|_| |_| |_|
-                             
-                             ";
 
             Console.Clear();
 
-            Console.WriteLine(exam_text_ascii);
+            Console.ReplaceAllColorsWithDefaults();
+            Console.WriteWithGradient(FiggleFonts.Big.Render("Exam"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             string marks_file = "marks.txt";
             string file_name = Directory.GetCurrentDirectory();
@@ -275,32 +264,20 @@ namespace assignment
                     else { stu.Grade = "Fail"; }
 
                     
-                    string to_file = (stu.Grade + " " + stu.Score + "% " + stu.Name);
-                    Console.WriteLine(to_file);
+                    string to_file = (stu.Grade + " " + stu.Score + "% " + stu.Name + "\n");
+                    Console.WriteFormatted(to_file, Color.White);
                     if (stu.Grade == "Distinction")
                     {
-                        File.AppendAllText("distinctionList.txt", to_file + Environment.NewLine);
+                        File.AppendAllText("distinctionList.txt", to_file);
                     }
                     
                 }
-                
-                
-                
-
-                Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-
+                //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
             }
             else { Console.WriteLine("File 'marks.txt' does not exist\nPlease re-run the program once this file exists"); }
 
-
-
-
-
-
         }
-
-
     }
 
     public class Student
