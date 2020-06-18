@@ -28,7 +28,7 @@ namespace assignment
 
                 
                 Console.WriteWithGradient("(1) Pay\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-                Console.WriteWithGradient("(2) Months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteWithGradient("(2) months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                 Console.WriteWithGradient("(3) Exam\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                 Console.WriteWithGradient("(4) Exit\n\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
@@ -40,24 +40,30 @@ namespace assignment
                 switch (menu)
                 {
                     case "1":
-                        Console.Write("Please enter the number of hours worked. Valid input is between 0 and 60: ");
-                        string read_line = Console.ReadLine();
-                        int time_worked;
-                        bool success = Int32.TryParse(read_line, out time_worked);
-                        if (success != true)
-                        {
-                            Console.WriteLine("'{0}' is not a valid number.", read_line);
-                            break;
-                        }
+                        bool hw_running = true;
+                        int time_worked = 0;
+                        while (hw_running == true){
+                            Console.WriteFormatted("Please enter the number of hours worked. Valid input is between 0 and 60: ", Color.White);
+                            string read_line = Console.ReadLine();
+                            bool success = Int32.TryParse(read_line, out time_worked);
+                            if (success != true)
+                            {
+                                Console.Clear();
+                                Console.WriteFormatted(String.Format("'{0}' is not a valid number.\n", read_line), Color.Red);
+                            }
+                            else { hw_running = false; }
 
-                        decimal pay_amount = Pay_calc(time_worked);
+                        }
+                        
+
+                        decimal pay_amount = pay_calc(time_worked);
                         Console.WriteLine(pay_amount.ToString("C2"));
                         
                         break;
 
                     case "2":
                         int chosen_month_int = get_months();
-                        int length_of_month = Months(chosen_month_int);
+                        int length_of_month = months(chosen_month_int);
                         Console.WriteLineFormatted("The length of the month selected is " + length_of_month.ToString(), Color.White);
                         break;
 
@@ -85,7 +91,7 @@ namespace assignment
         // 35% after 45 hours
         // no more than 60h worked
         //
-        static decimal Pay_calc(decimal hours_worked)
+        static decimal pay_calc(decimal hours_worked)
         {
             Console.Clear();
             decimal forty_five = 45;
@@ -93,7 +99,7 @@ namespace assignment
 
 
 
-            if (hours_worked >= 60)
+            if (hours_worked > 60)
             {
                 Console.WriteLine("Unable to pay more than 60h.");
                 return (0);
@@ -108,13 +114,13 @@ namespace assignment
             else if(hours_worked > 45)
             {
                 decimal val = (tax_calc((hours_worked - 45), 35, 27));
-                return (val + Pay_calc(forty_five));
+                return (val + pay_calc(forty_five));
             }
 
             else if (hours_worked > 5)
             {
                 decimal val = (tax_calc((hours_worked - 5), 20, 27));
-                return (val + Pay_calc(five));
+                return (val + pay_calc(five));
             }
 
             else if (hours_worked <= 5)
@@ -141,14 +147,55 @@ namespace assignment
             return (hours*pay_rate - (hours * pay_rate * (percentage_tax_rate / 100)));
         }
 
+        static int get_months()
+        {
+            Console.Clear();
 
-        static int Months(int month_type)
+            string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            Colorful.Console.ReplaceAllColorsWithDefaults();
+
+            Console.WriteWithGradient(FiggleFonts.Big.Render("months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+
+            for (int i = 0; i < months_array.Length; i++)
+            {
+                Console.WriteFormatted(String.Format("{0} {1}\n", i + 1, months_array[i]), Color.White);
+            }
+
+            bool running = true;
+            int test = 0;
+            while (running == true)
+            {
+                
+                Console.WriteFormatted(("Month would you like to find the length of: "), Color.White);
+                string in_put = Console.ReadLine();
+
+                bool can_convert = int.TryParse(in_put, out test);
+                Console.WriteLine(test);
+                if ((can_convert == true) & (test < months_array.Length+1) & (test > 0))
+                {
+                    running = false;
+                }
+                
+                else {
+                    Console.Clear();
+                    Console.WriteFormatted((in_put + " " + "is not a valid selection\nPlease try again\n"), Color.Red); }
+            }
+
+            Console.WriteFormatted(test.ToString(), Color.White);
+
+
+
+            return test;
+        }
+
+        static int months(int month_type)
         {
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             int[] months_length = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-            if (month_type > months_array.Length) {
-                Console.WriteFormatted("Please choose a valid option", Color.White);
+            if (month_type > months_array.Length)
+            {
+                Console.WriteFormatted("Please choose a valid option", Color.Red);
             }
 
             if (month_type == 2)
@@ -160,7 +207,7 @@ namespace assignment
                     year = int.Parse(Console.ReadLine());
                     if (year < 1)
                     {
-                        Console.WriteLine("Year is before 0 please try again");
+                        Console.WriteFormatted("Year is before 0 please try again\n", Color.Red);
                     }
                     else
                     {
@@ -181,36 +228,15 @@ namespace assignment
                     Console.WriteLine("Not a leap year");
                     return (28);
                 }
-                
+
             }
 
             else
             {
                 Console.Clear();
-                return (months_length[month_type]);
+                return (months_length[month_type - 1]);
             }
 
-        }
-
-        static int get_months()
-        {
-
-
-            Console.Clear();
-
-            string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-            Colorful.Console.ReplaceAllColorsWithDefaults();
-
-            Console.WriteWithGradient(FiggleFonts.Big.Render("Months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-
-            for (int i = 0; i < months_array.Length; i++)
-            {
-                Console.WriteFormatted(String.Format("{0} {1}", i + 1, months_array[i]), Color.White);
-                Console.WriteLine();
-            }
-
-            int month_chosen = int.Parse(Console.ReadLine());
-            return month_chosen;
         }
 
         static void exam()
@@ -275,7 +301,7 @@ namespace assignment
                 //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
             }
-            else { Console.WriteLine("File 'marks.txt' does not exist\nPlease re-run the program once this file exists"); }
+            else {Console.WriteFormatted("File 'marks.txt' does not exist\nPlease re-run the program once this file exists\n", Color.Red); }
 
         }
     }
