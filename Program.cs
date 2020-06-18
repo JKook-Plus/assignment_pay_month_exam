@@ -193,10 +193,7 @@ namespace assignment
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             int[] months_length = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-            if (month_type > months_array.Length)
-            {
-                Console.WriteFormatted("Please choose a valid option", Color.Red);
-            }
+
 
             if (month_type == 2)
             {
