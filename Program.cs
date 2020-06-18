@@ -28,7 +28,7 @@ namespace assignment
 
                 
                 Console.WriteWithGradient("(1) Pay\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-                Console.WriteWithGradient("(2) months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteWithGradient("(2) Months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                 Console.WriteWithGradient("(3) Exam\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                 Console.WriteWithGradient("(4) Exit\n\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
@@ -40,6 +40,8 @@ namespace assignment
                 switch (menu)
                 {
                     case "1":
+                        Console.Clear();
+                        Console.WriteWithGradient(FiggleFonts.Big.Render("Pay Calculation"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                         bool hw_running = true;
                         int time_worked = 0;
                         while (hw_running == true){
@@ -154,7 +156,7 @@ namespace assignment
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             Colorful.Console.ReplaceAllColorsWithDefaults();
 
-            Console.WriteWithGradient(FiggleFonts.Big.Render("months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+            Console.WriteWithGradient(FiggleFonts.Big.Render("Months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             for (int i = 0; i < months_array.Length; i++)
             {
@@ -170,7 +172,7 @@ namespace assignment
                 string in_put = Console.ReadLine();
 
                 bool can_convert = int.TryParse(in_put, out test);
-                Console.WriteLine(test);
+                //Console.WriteLine(test);
                 if ((can_convert == true) & (test < months_array.Length+1) & (test > 0))
                 {
                     running = false;
@@ -181,7 +183,7 @@ namespace assignment
                     Console.WriteFormatted((in_put + " " + "is not a valid selection\nPlease try again\n"), Color.Red); }
             }
 
-            Console.WriteFormatted(test.ToString(), Color.White);
+            //Console.WriteFormatted(test.ToString(), Color.White);
 
 
 
@@ -200,29 +202,28 @@ namespace assignment
                 int year = 0;
                 while (year < 1)
                 {
-                    Console.WriteLine("What year are you looking for?");
-                    year = int.Parse(Console.ReadLine());
+                    Console.WriteFormatted("Year: ", Color.White);
+                    string year_input = Console.ReadLine();
+
+                    bool can_convert = int.TryParse(year_input, out year);
                     if (year < 1)
                     {
-                        Console.WriteFormatted("Year is before 0 please try again\n", Color.Red);
+                        Console.WriteFormatted(String.Format("{0} is not a valid year\nPlease try again\n", year_input), Color.Red);
                     }
-                    else
-                    {
-                        continue;
-                    }
+
                 }
 
                 if (((year % 4) == 0) & ((year % 100) != 0) || ((year % 400) == 0))
                 {
                     Console.Clear();
-                    Console.WriteLine("The year selected is a leap year");
+                    Console.WriteFormatted(String.Format("{0} is a leap year\n", year), Color.White);
 
                     return (29);
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Not a leap year");
+                    Console.WriteFormatted(String.Format("{0} is not a leap year\n", year), Color.White);
                     return (28);
                 }
 
@@ -245,7 +246,6 @@ namespace assignment
             Console.WriteWithGradient(FiggleFonts.Big.Render("Exam"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             string marks_file = "marks.txt";
-            string file_name = Directory.GetCurrentDirectory();
 
             if (File.Exists(marks_file))
             {
