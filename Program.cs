@@ -295,6 +295,7 @@ namespace assignment
                     }
                     
                 }
+                Console.WriteLineFormatted(String.Format(@"Please find distinctionList.txt in {0}distinctionList.txt", AppDomain.CurrentDomain.BaseDirectory), Color.Green);
                 //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
             }
