@@ -1,6 +1,4 @@
-﻿using Colorful;
-using Figgle;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Console = Colorful.Console;
 
 namespace assignment
 {
@@ -19,39 +16,38 @@ namespace assignment
             bool to_continue = true;
 
             
-            Figlet figlet = new Figlet();
 
 
             while (to_continue)
             {
-                Console.WriteWithGradient(FiggleFonts.Big.Render("Menu"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteLine(("Menu"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
                 
-                Console.WriteWithGradient("(1) Pay\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-                Console.WriteWithGradient("(2) Months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-                Console.WriteWithGradient("(3) Exam\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
-                Console.WriteWithGradient("(4) Exit\n\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteLine("(1) Pay\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteLine("(2) Months\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteLine("(3) Exam\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                Console.WriteLine("(4) Exit\n\n", Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
-                //Colorful.Console.ReplaceAllColorsWithDefaults();
-                //Console.ReplaceAllColorsWithDefaults();
-                Console.WriteFormatted("Please choose an option: ", Color.White);
+                //Colorful.
+                //
+                Console.WriteLine("Please choose an option: ", Color.White);
 
                 string menu = Console.ReadLine();
                 switch (menu)
                 {
                     case "1":
                         Console.Clear();
-                        Console.WriteWithGradient(FiggleFonts.Big.Render("Pay Calculation"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+                        Console.WriteLine(("Pay Calculation"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
                         bool hw_running = true;
                         int time_worked = 0;
                         while (hw_running == true){
-                            Console.WriteFormatted("Please enter the number of hours worked. Valid input is between 0 and 60: ", Color.White);
+                            Console.WriteLine("Please enter the number of hours worked. Valid input is between 0 and 60: ", Color.White);
                             string read_line = Console.ReadLine();
                             bool success = Int32.TryParse(read_line, out time_worked);
                             if (success != true)
                             {
                                 Console.Clear();
-                                Console.WriteFormatted(String.Format("'{0}' is not a valid number.\n", read_line), Color.Red);
+                                Console.WriteLine(String.Format("'{0}' is not a valid number.\n", read_line), Color.Red);
                             }
                             else { hw_running = false; }
 
@@ -66,7 +62,7 @@ namespace assignment
                     case "2":
                         int chosen_month_int = get_months();
                         int length_of_month = months(chosen_month_int);
-                        Console.WriteLineFormatted("The length of the month selected is " + length_of_month.ToString(), Color.White);
+                        Console.WriteLine("The length of the month selected is " + length_of_month.ToString(), Color.White);
                         break;
 
                     case "3":
@@ -154,13 +150,13 @@ namespace assignment
             Console.Clear();
 
             string[] months_array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-            Colorful.Console.ReplaceAllColorsWithDefaults();
+            Colorful.
 
-            Console.WriteWithGradient(FiggleFonts.Big.Render("Months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+            Console.WriteLine(("Months"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             for (int i = 0; i < months_array.Length; i++)
             {
-                Console.WriteFormatted(String.Format("{0} {1}\n", i + 1, months_array[i]), Color.White);
+                Console.WriteLine(String.Format("{0} {1}\n", i + 1, months_array[i]), Color.White);
             }
 
             bool running = true;
@@ -168,7 +164,7 @@ namespace assignment
             while (running == true)
             {
                 
-                Console.WriteFormatted(("Month would you like to find the length of: "), Color.White);
+                Console.WriteLine(("Month would you like to find the length of: "), Color.White);
                 string in_put = Console.ReadLine();
 
                 bool can_convert = int.TryParse(in_put, out test);
@@ -180,10 +176,10 @@ namespace assignment
                 
                 else {
                     Console.Clear();
-                    Console.WriteFormatted((in_put + " " + "is not a valid selection\nPlease try again\n"), Color.Red); }
+                    Console.WriteLine((in_put + " " + "is not a valid selection\nPlease try again\n"), Color.Red); }
             }
 
-            //Console.WriteFormatted(test.ToString(), Color.White);
+            //Console.WriteLine(test.ToString(), Color.White);
 
 
 
@@ -202,13 +198,13 @@ namespace assignment
                 int year = 0;
                 while (year < 1)
                 {
-                    Console.WriteFormatted("Year: ", Color.White);
+                    Console.WriteLine("Year: ", Color.White);
                     string year_input = Console.ReadLine();
 
                     bool can_convert = int.TryParse(year_input, out year);
                     if (year < 1)
                     {
-                        Console.WriteFormatted(String.Format("{0} is not a valid year\nPlease try again\n", year_input), Color.Red);
+                        Console.WriteLine(String.Format("{0} is not a valid year\nPlease try again\n", year_input), Color.Red);
                     }
 
                 }
@@ -216,14 +212,14 @@ namespace assignment
                 if (((year % 4) == 0) & ((year % 100) != 0) || ((year % 400) == 0))
                 {
                     Console.Clear();
-                    Console.WriteFormatted(String.Format("{0} is a leap year\n", year), Color.White);
+                    Console.WriteLine(String.Format("{0} is a leap year\n", year), Color.White);
 
                     return (29);
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteFormatted(String.Format("{0} is not a leap year\n", year), Color.White);
+                    Console.WriteLine(String.Format("{0} is not a leap year\n", year), Color.White);
                     return (28);
                 }
 
@@ -242,8 +238,8 @@ namespace assignment
 
             Console.Clear();
 
-            Console.ReplaceAllColorsWithDefaults();
-            Console.WriteWithGradient(FiggleFonts.Big.Render("Exam"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
+            
+            Console.WriteLine(("Exam"), Color.HotPink, ColorTranslator.FromHtml("#ff6969"), 3);
 
             string marks_file = "marks.txt";
 
@@ -288,7 +284,7 @@ namespace assignment
 
                     
                     string to_file = (stu.Grade + " " + stu.Score + "% " + stu.Name + "\n");
-                    Console.WriteFormatted(to_file, Color.White);
+                    Console.WriteLine(to_file, Color.White);
                     if (stu.Grade == "Distinction")
                     {
                         File.AppendAllText("distinctionList.txt", to_file);
@@ -298,7 +294,7 @@ namespace assignment
                 //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
 
             }
-            else {Console.WriteFormatted("File 'marks.txt' does not exist\nPlease re-run the program once this file exists\n", Color.Red); }
+            else {Console.WriteLine("File 'marks.txt' does not exist\nPlease re-run the program once this file exists\n", Color.Red); }
 
         }
     }
